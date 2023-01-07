@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Game/UFO/PlayerUFO.gd" type="Script" id=1]
 [ext_resource path="res://Game/UFO/Sprites/shipPink_manned.png" type="Texture" id=2]
+[ext_resource path="res://Game/UFO/HarvestArea.gd" type="Script" id=3]
+[ext_resource path="res://Game/UFO/Sprites/Green_equilateral_triangle_point_up.svg.png" type="Texture" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -15,9 +17,23 @@ animations = [ {
 radius = 27.0
 height = 2.0
 
+[sub_resource type="CanvasItemMaterial" id=3]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 13.0
+
 [node name="PlayerUFO" type="RigidBody2D"]
-position = Vector2( 346, 106 )
+position = Vector2( 315, 98 )
 gravity_scale = 0.5
+angular_damp = 2.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -32,3 +48,36 @@ animation = "Hover"
 position = Vector2( -1, 0 )
 rotation = 1.5708
 shape = SubResource( 2 )
+
+[node name="TracktorBeamArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+priority = 5.0
+space_override = 2
+gravity_vec = Vector2( 0, -1 )
+gravity = 500.0
+
+[node name="TrackBeamCollision" type="CollisionPolygon2D" parent="TracktorBeamArea"]
+modulate = Color( 0.968627, 0.0392157, 0.0392157, 1 )
+material = SubResource( 3 )
+position = Vector2( 0, 2 )
+scale = Vector2( 8.68143, 17.7302 )
+polygon = PoolVector2Array( 0, 0, 10, 10, -10, 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TracktorBeamArea"]
+position = Vector2( 1, 97 )
+scale = Vector2( 0.079, 0.094 )
+frames = SubResource( 4 )
+
+[node name="HarvestArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+input_pickable = false
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HarvestArea"]
+position = Vector2( 0, 33 )
+rotation = 1.57079
+shape = SubResource( 5 )
+
+[connection signal="body_entered" from="HarvestArea" to="." method="_on_HarvestArea_body_entered"]

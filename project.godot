@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="LudumDare52"
-run/main_scene="res://Game/UFO/PlayerUFO.tscn"
+run/main_scene="res://Game/TractorTestScene.tscn"
 config/icon="res://icon.png"
 
 [display]
