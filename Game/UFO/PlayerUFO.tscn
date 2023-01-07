@@ -12,18 +12,23 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 17.0
-height = 40.0
+radius = 27.0
+height = 2.0
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="PlayerUFO" type="RigidBody2D"]
+position = Vector2( 346, 106 )
+gravity_scale = 0.5
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.4, 0.4 )
 frames = SubResource( 1 )
 animation = "Hover"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, 13 )
+position = Vector2( -1, 0 )
 rotation = 1.5708
 shape = SubResource( 2 )
