@@ -78,9 +78,9 @@ priority = 5.0
 space_override = 2
 gravity_point = true
 gravity_vec = Vector2( 0, -1000 )
-gravity = 60.0
+gravity = 600.0
 linear_damp = 0.02
-angular_damp = 0.1
+angular_damp = 0.5
 
 [node name="TrackBeamCollision" type="CollisionPolygon2D" parent="TracktorBeamArea"]
 modulate = Color( 0.968627, 0.0392157, 0.0392157, 1 )

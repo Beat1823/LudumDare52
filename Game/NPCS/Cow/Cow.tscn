@@ -32,6 +32,7 @@ extents = Vector2( 41, 21.5 )
 
 [node name="RigidBody2D" type="RigidBody2D"]
 collision_layer = 3
+can_sleep = false
 script = ExtResource( 8 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -39,7 +40,6 @@ position = Vector2( 10, -4 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "Cow"
-frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
