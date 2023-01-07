@@ -14,6 +14,11 @@ config/name="LudumDare52"
 run/main_scene="res://Game/UFO/PlayerUFO.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=720
+window/size/height=720
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

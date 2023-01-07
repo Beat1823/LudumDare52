@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/UFO/PlayerUFO.tscn" type="PackedScene" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 400, 50 )
+
+[node name="MainScene" type="StaticBody2D"]
+position = Vector2( 356, 675 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.5, 0 )
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="CollisionShape2D"]
+margin_left = -400.0
+margin_top = -50.0
+margin_right = 400.0
+margin_bottom = 50.0
+color = Color( 0.235294, 0.482353, 0.329412, 1 )
+
+[node name="PlayerUFO" parent="." instance=ExtResource( 1 )]
+position = Vector2( 11, -506 )
