@@ -1,9 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Game/UFO/PlayerUFO.gd" type="Script" id=1]
 [ext_resource path="res://Game/UFO/Sprites/shipPink_manned.png" type="Texture" id=2]
 [ext_resource path="res://Game/UFO/HarvestArea.gd" type="Script" id=3]
 [ext_resource path="res://Game/UFO/Sprites/Green_equilateral_triangle_point_up.svg.png" type="Texture" id=4]
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0.00970149, 0.0900902 ), 0.0, 0.241441, 0, 0, Vector2( 0.496269, 0.342342 ), 0.736102, 0.736102, 0, 0, Vector2( 0.508209, 0.990991 ), 5.63363, 0.0, 0, 0, Vector2( 1, 1 ), 0.0656082, 0.0, 0, 0 ]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -31,13 +34,14 @@ animations = [ {
 radius = 13.0
 
 [node name="PlayerUFO" type="RigidBody2D"]
-position = Vector2( 315, 98 )
+position = Vector2( 316, 104 )
 gravity_scale = 0.5
 angular_damp = 2.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+stabilize_curve = SubResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.4, 0.4 )
@@ -54,15 +58,18 @@ collision_layer = 2
 collision_mask = 2
 priority = 5.0
 space_override = 2
-gravity_vec = Vector2( 0, -1 )
-gravity = 500.0
+gravity_point = true
+gravity_vec = Vector2( 0, -1000 )
+gravity = 60.0
+linear_damp = 0.02
+angular_damp = 0.1
 
 [node name="TrackBeamCollision" type="CollisionPolygon2D" parent="TracktorBeamArea"]
 modulate = Color( 0.968627, 0.0392157, 0.0392157, 1 )
 material = SubResource( 3 )
-position = Vector2( 0, 2 )
+position = Vector2( 2, 13 )
 scale = Vector2( 8.68143, 17.7302 )
-polygon = PoolVector2Array( 0, 0, 10, 10, -10, 10 )
+polygon = PoolVector2Array( 0, 0, 10.367, 10.0394, -10.367, 10.0958 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="TracktorBeamArea"]
 position = Vector2( 1, 97 )

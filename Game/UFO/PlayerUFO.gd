@@ -3,7 +3,8 @@ extends RigidBody2D
 var thrust = Vector2(0, -500)
 var reverse_thrust = Vector2(0, 250)
 var torque = 6000
-var stabilize_factor = 0.2
+var stabilize_torqueForce = 3000
+export (Curve) var stabilize_curve
 func _ready():
 	SetTractorBeam (false)
 	
@@ -37,7 +38,10 @@ func _process(delta):
 		
 
 func StabilizeUFO():
-	var stabilize_torque = -1*sign(rotation_degrees) * torque * stabilize_factor
+	var t = abs(rotation_degrees/180)
+
+	var modifier  = stabilize_curve.interpolate(t)
+	var stabilize_torque = -1*sign(rotation_degrees) * stabilize_torqueForce * modifier
 	set_applied_torque (stabilize_torque)
 	print (stabilize_torque)
 func _on_HarvestArea_body_entered(body):
