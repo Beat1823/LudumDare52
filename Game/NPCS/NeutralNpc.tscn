@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game/NPCS/Scarecrow/Sprites/Scarecrow.png" type="Texture" id=1]
 [ext_resource path="res://Game/NPCS/Cow/cow3.png" type="Texture" id=2]
 [ext_resource path="res://Game/NPCS/Cow/cow.png" type="Texture" id=3]
 [ext_resource path="res://Game/NPCS/Cow/cow2.png" type="Texture" id=4]
+[ext_resource path="res://Game/NPCS/NeutralNpc.gd" type="Script" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -23,21 +24,24 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 31.0
-height = 46.0
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 41, 21.5 )
 
-[node name="NeutralNpc" type="KinematicBody2D"]
+[node name="NeutralNpc" type="RigidBody2D"]
+script = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 10, -4 )
-scale = Vector2( 1.5, 1.5 )
+scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "Cow"
 frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2( 12, 5.5 )
 shape = SubResource( 2 )
-disabled = true
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
