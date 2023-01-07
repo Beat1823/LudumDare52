@@ -2,8 +2,8 @@ extends RigidBody2D
 
 # Energy Params
 export(float) var MaxEnergy = 100
-var energy
-export var ImpactEnergyModifier = 1
+var energy:float
+export var ImpactEnergyModifier = 0.004
 export var EnergyConsuptimtionPerSec =1
 
 # Impact vars
@@ -28,6 +28,7 @@ export(float) var StabilizeDelaySeconds
 func _ready():
 	SetTractorBeam (false)
 	energy = MaxEnergy
+	InitializeEnergyBar()
 	
 func SetTractorBeam (IsON):
 	$TracktorBeamArea/TrackBeamCollision.disabled = !IsON
@@ -45,6 +46,7 @@ func _integrate_forces(state):
 		print(collision_force)
 		if (!$CollisionShape2D/HitParticles.emitting):
 			$CollisionShape2D/HitParticles.restart()
+		ReduceEnergy(collision_force.length()*ImpactEnergyModifier)
 	previous_linear_velocity = state.linear_velocity
 	
 	if collision_force != Vector2.ZERO:
@@ -72,13 +74,6 @@ func _integrate_forces(state):
 		StabilizeUFO(shouldStabilize)
 	else:
 		set_applied_torque(rotation_dir * torque)
-	
-func _process(delta):
-	if Input.is_action_pressed("TractorBeam"):
-		SetTractorBeam (true)
-	else:
-		SetTractorBeam (false)
-	
 
 func StabilizeUFO(isStab):
 	if (!isStab):
@@ -89,6 +84,18 @@ func StabilizeUFO(isStab):
 	var stabilize_torque = -1*sign(rotation_degrees) * stabilize_torqueForce * modifier
 	set_applied_torque (stabilize_torque)
 
+func _process(delta):
+	if Input.is_action_pressed("TractorBeam"):
+		SetTractorBeam (true)
+	else:
+		SetTractorBeam (false)
+	ReduceEnergy (delta*EnergyConsuptimtionPerSec)
+
+func ReduceEnergy(amount):
+	energy -= amount
+	if (energy <=0 ):
+		queue_free()
+		print ("GAME OVER")
 
 func _on_HarvestArea_body_entered(body):
 	pass
@@ -97,3 +104,13 @@ func _on_HarvestArea_body_entered(body):
 
 func _on_StabilizationTimer_timeout():
 	shouldStabilize = true
+
+func InitializeEnergyBar():
+	UpdateEnergyBar()
+	#$ProgressBar.max_value = MaxEnergy
+
+func UpdateEnergyBar():
+	$ProgressBar.text = String (energy)
+
+func _on_EnergyUpdateTimer_timeout():
+	UpdateEnergyBar()

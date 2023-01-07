@@ -32,7 +32,7 @@ animations = [ {
 radius = 13.0
 
 [node name="PlayerUFO" type="RigidBody2D"]
-position = Vector2( 316, 104 )
+position = Vector2( 317, 98 )
 gravity_scale = 0.5
 contacts_reported = 10
 contact_monitor = true
@@ -108,5 +108,17 @@ shape = SubResource( 5 )
 [node name="StabilizationTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="EnergyUpdateTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="ProgressBar" type="RichTextLabel" parent="."]
+margin_left = -15.0
+margin_top = -39.0
+margin_right = 25.0
+margin_bottom = 1.0
+text = "Test"
+
 [connection signal="body_entered" from="HarvestArea" to="." method="_on_HarvestArea_body_entered"]
 [connection signal="timeout" from="StabilizationTimer" to="." method="_on_StabilizationTimer_timeout"]
+[connection signal="timeout" from="EnergyUpdateTimer" to="." method="_on_EnergyUpdateTimer_timeout"]
