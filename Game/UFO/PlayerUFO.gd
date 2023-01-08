@@ -42,13 +42,18 @@ export var StabilizeDownAngleThershold = 90.0
 export (Curve) var stabilize_curve
 export(float) var StabilizeDelaySeconds
 
-
+signal NpcAbsorbed
 
 func _ready():
+	hide()
 	SetTractorBeam (false)
 	energy = MaxEnergy
 	InitializeEnergyBar()
 	
+func start(pos):
+	position = pos
+	show() 
+
 func SetTractorBeam (IsON):
 	$TracktorBeamArea/TrackBeamCollision.disabled = !IsON
 	$HarvestArea/CollisionShape2D.disabled = !IsON
@@ -146,10 +151,11 @@ func ReduceEnergy(amount):
 		queue_free()
 		print ("GAME OVER")
 
-func _on_HarvestArea_body_entered(body):
-	pass
+func _on_HarvestArea_body_entered(body): 
+	if body.is_in_group("enemies"):
+		body.queue_free()
+		emit_signal("NpcAbsorbed")
 	
-
 
 func _on_StabilizationTimer_timeout():
 	shouldStabilize = true

@@ -11,13 +11,17 @@ config_version=4
 [application]
 
 config/name="LudumDare52"
-run/main_scene="res://Game/TractorTestScene.tscn"
+run/main_scene="res://Game/MainScene.tscn"
 config/icon="res://icon.png"
 
 [display]
 
 window/size/width=720
 window/size/height=720
+
+[global]
+
+gravity=false
 
 [gui]
 
