@@ -3,7 +3,7 @@
 [ext_resource path="res://Game/UI/Title.png" type="Texture" id=1]
 [ext_resource path="res://Game/UI/Start button.png" type="Texture" id=2]
 [ext_resource path="res://Game/UI/Harvest moon.png" type="Texture" id=3]
-[ext_resource path="res://Game/ScartScreen.gd" type="Script" id=4]
+[ext_resource path="res://Game/StartScreen.gd" type="Script" id=4]
 
 [node name="Node2D" type="MarginContainer"]
 anchor_right = 1.0

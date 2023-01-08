@@ -11,6 +11,13 @@ position = Vector2( 356, 675 )
 script = ExtResource( 3 )
 SpawnLocations = [ Vector2( -300, -200 ), Vector2( 300, -200 ) ]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -356.0
+margin_top = -674.0
+margin_right = 668.0
+margin_bottom = -74.0
+color = Color( 0.137255, 0.0745098, 0.0745098, 1 )
+
 [node name="PlayerUFO" parent="." instance=ExtResource( 1 )]
 position = Vector2( 18, -450 )
 
