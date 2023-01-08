@@ -12,6 +12,7 @@ func _ready():
 func gameover():
 	$ScoreTimer.stop()
 	$SpawnTimer.stop()
+	$GameOverScreen.show()
 
 func newgame():
 	score = 0
@@ -48,3 +49,7 @@ func _on_PlayerUFO_NpcAbsorbed():
 
 func _on_PlayerUFO_PlayerDestroyed():
 	gameover()
+
+
+func _on_Restart_pressed():
+	$GameOverScreen.hide()

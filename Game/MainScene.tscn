@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Game/UFO/PlayerUFO.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Audio/Music.wav" type="AudioStream" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://Game/UI/GameFontCramps.tres" type="DynamicFontData" id=4]
 [ext_resource path="res://Game/Ground/background.png" type="Texture" id=5]
 [ext_resource path="res://Game/Ground/middleground.png" type="Texture" id=6]
+[ext_resource path="res://Game/UI/Fail Message.png" type="Texture" id=7]
+[ext_resource path="res://Game/UI/Game Over.png" type="Texture" id=8]
+[ext_resource path="res://Game/UI/Try Again.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 512, 50 )
@@ -34,10 +37,10 @@ margin_bottom = -634.0
 texture = ExtResource( 5 )
 
 [node name="Middleground" type="TextureRect" parent="."]
-margin_left = -356.0
-margin_top = -675.0
-margin_right = 711.0
-margin_bottom = -75.0
+margin_left = -367.0
+margin_top = -629.0
+margin_right = 700.0
+margin_bottom = -29.0
 texture = ExtResource( 6 )
 
 [node name="PlayerUFO" parent="." instance=ExtResource( 1 )]
@@ -92,9 +95,50 @@ text = "1"
 stream = ExtResource( 2 )
 autoplay = true
 
+[node name="GameOverScreen" type="MarginContainer" parent="."]
+visible = false
+margin_left = -375.0
+margin_top = -684.0
+margin_right = 723.0
+margin_bottom = -65.0
+
+[node name="ColorOverlay" type="ColorRect" parent="GameOverScreen"]
+modulate = Color( 0, 0, 0, 0.529412 )
+margin_right = 1098.0
+margin_bottom = 619.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverScreen"]
+margin_right = 1098.0
+margin_bottom = 619.0
+
+[node name="GameOverMessage" type="TextureRect" parent="GameOverScreen/VBoxContainer"]
+modulate = Color( 0.792157, 0, 0, 1 )
+margin_right = 1098.0
+margin_bottom = 174.0
+texture = ExtResource( 7 )
+stretch_mode = 4
+
+[node name="GameOverText" type="TextureRect" parent="GameOverScreen/VBoxContainer"]
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 178.0
+margin_right = 1098.0
+margin_bottom = 337.0
+texture = ExtResource( 8 )
+stretch_mode = 4
+
+[node name="Restart" type="TextureButton" parent="GameOverScreen/VBoxContainer/GameOverText"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 350.0
+margin_top = 163.0
+margin_right = 749.0
+margin_bottom = 274.0
+texture_normal = ExtResource( 9 )
+stretch_mode = 3
+
 [connection signal="NpcAbsorbed" from="PlayerUFO" to="." method="_on_PlayerUFO_NpcAbsorbed"]
 [connection signal="NpcAbsorbed" from="PlayerUFO" to="PlayerUFO" method="_on_PlayerUFO_NpcAbsorbed"]
 [connection signal="PlayerDestroyed" from="PlayerUFO" to="." method="_on_PlayerUFO_PlayerDestroyed"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
 [connection signal="timeout" from="StartWaitTimer" to="." method="_on_StartWaitTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="pressed" from="GameOverScreen/VBoxContainer/GameOverText/Restart" to="." method="_on_Restart_pressed"]
