@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Game/UFO/PlayerUFO.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Audio/Music.wav" type="AudioStream" id=2]
 [ext_resource path="res://Game/MainScene.gd" type="Script" id=3]
 [ext_resource path="res://Game/UI/GameFontCramps.tres" type="DynamicFontData" id=4]
+[ext_resource path="res://Game/Ground/background.png" type="Texture" id=5]
+[ext_resource path="res://Game/Ground/middleground.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 512, 50 )
@@ -17,11 +19,26 @@ script = ExtResource( 3 )
 SpawnLocations = [ Vector2( -300, -200 ), Vector2( 300, -200 ) ]
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 margin_left = -356.0
 margin_top = -674.0
 margin_right = 668.0
 margin_bottom = -74.0
 color = Color( 0.137255, 0.0745098, 0.0745098, 1 )
+
+[node name="Background" type="TextureRect" parent="."]
+margin_left = -356.0
+margin_top = -674.0
+margin_right = -316.0
+margin_bottom = -634.0
+texture = ExtResource( 5 )
+
+[node name="Middleground" type="TextureRect" parent="."]
+margin_left = -356.0
+margin_top = -675.0
+margin_right = 711.0
+margin_bottom = -75.0
+texture = ExtResource( 6 )
 
 [node name="PlayerUFO" parent="." instance=ExtResource( 1 )]
 position = Vector2( 18, -450 )
@@ -38,11 +55,12 @@ position = Vector2( 0.5, 0 )
 shape = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="RigidBody2D/CollisionShape2D2"]
+visible = false
 margin_left = -512.0
 margin_top = -50.0
 margin_right = 512.0
 margin_bottom = 50.0
-color = Color( 0.235294, 0.482353, 0.329412, 1 )
+color = Color( 0.14902, 0.282353, 0.2, 1 )
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 3.0
