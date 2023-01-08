@@ -74,8 +74,7 @@ func _integrate_forces(state):
 		var dv : Vector2 = state.linear_velocity - previous_linear_velocity
 		collision_impact= dv / (state.inverse_mass * state.step)
 		print(collision_impact)
-		if (!$CollisionShape2D/HitParticles.emitting):
-			$CollisionShape2D/HitParticles.restart()
+		tryEmitColisionParticles(state.get_contact_collider_position(0))
 		ReduceEnergy(collision_impact.length()*ImpactEnergyModifier)
 	previous_linear_velocity = state.linear_velocity
 	
@@ -179,3 +178,12 @@ func _on_EnergyUpdateTimer_timeout():
 func _on_PlayerUFO_NpcAbsorbed():
 	$SoundPickup.play()
 	pass # Replace with function body.
+func tryEmitColisionParticles (impactPoin):
+	if (!$CollisionShape2D/HitParticles.emitting):
+		$CollisionShape2D/HitParticles.restart()
+
+
+func _on_TracktorBeamArea_body_entered(body):
+	if (body.is_in_group("enemies")):
+		body.mode = RigidBody2D.MODE_RIGID
+		body.is_moving = false
