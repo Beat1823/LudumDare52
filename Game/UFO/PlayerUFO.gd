@@ -43,6 +43,7 @@ export (Curve) var stabilize_curve
 export(float) var StabilizeDelaySeconds
 
 signal NpcAbsorbed
+signal PlayerDestroyed
 
 func _ready():
 	hide()
@@ -148,6 +149,7 @@ func _process(delta):
 func ReduceEnergy(amount):
 	energy -= amount
 	if (energy <=0 ):
+		emit_signal("PlayerDestroyed")
 		queue_free()
 		print ("GAME OVER")
 

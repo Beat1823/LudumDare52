@@ -16,14 +16,13 @@ func gameover():
 func newgame():
 	score = 0
 	$StartWaitTimer.start()
-	
 
 func _process(delta):
 	$ScoreLabel.text = String(score)
 
 func addscore(points):
 	score += points
-	
+
 func _on_StartWaitTimer_timeout():
 	$PlayerUFO.start($StartPos.position)
 	$RigidBody2D.show()
@@ -46,3 +45,6 @@ func _on_SpawnTimer_timeout():
 
 func _on_PlayerUFO_NpcAbsorbed():
 	addscore(5)
+
+func _on_PlayerUFO_PlayerDestroyed():
+	gameover()

@@ -4,27 +4,31 @@
 [ext_resource path="res://Game/MainScene.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 400, 50 )
+extents = Vector2( 512, 50 )
 
 [node name="MainScene" type="Node2D"]
 position = Vector2( 356, 675 )
 script = ExtResource( 3 )
-SpawnLocations = [ Vector2( -300, -100 ), Vector2( 300, -100 ) ]
+SpawnLocations = [ Vector2( -300, -200 ), Vector2( 300, -200 ) ]
 
 [node name="PlayerUFO" parent="." instance=ExtResource( 1 )]
 position = Vector2( 18, -450 )
 
 [node name="RigidBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 155, -125 )
 collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2( 0.5, 0 )
 shape = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="RigidBody2D/CollisionShape2D2"]
-margin_left = -400.0
+margin_left = -512.0
 margin_top = -50.0
-margin_right = 400.0
+margin_right = 512.0
 margin_bottom = 50.0
 color = Color( 0.235294, 0.482353, 0.329412, 1 )
 
@@ -37,7 +41,7 @@ one_shot = true
 [node name="ScoreTimer" type="Timer" parent="."]
 
 [node name="StartPos" type="Position2D" parent="."]
-position = Vector2( 24, -569 )
+position = Vector2( 180, -580 )
 
 [node name="ScoreLabel" type="RichTextLabel" parent="."]
 margin_left = -348.0
@@ -47,6 +51,7 @@ margin_bottom = -611.0
 text = "Score:0"
 
 [connection signal="NpcAbsorbed" from="PlayerUFO" to="." method="_on_PlayerUFO_NpcAbsorbed"]
+[connection signal="PlayerDestroyed" from="PlayerUFO" to="." method="_on_PlayerUFO_PlayerDestroyed"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
 [connection signal="timeout" from="StartWaitTimer" to="." method="_on_StartWaitTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
