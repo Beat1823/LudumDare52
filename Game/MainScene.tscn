@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Game/UFO/PlayerUFO.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Audio/Music.wav" type="AudioStream" id=2]
@@ -9,12 +9,21 @@
 [ext_resource path="res://Game/UI/Fail Message.png" type="Texture" id=7]
 [ext_resource path="res://Game/UI/Game Over.png" type="Texture" id=8]
 [ext_resource path="res://Game/UI/Try Again.png" type="Texture" id=9]
+[ext_resource path="res://Game/UI/Mokoto Glitch Mark.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 512, 50 )
 
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 29
+font_data = ExtResource( 10 )
 
 [node name="MainScene" type="Node2D"]
 position = Vector2( 356, 675 )
@@ -97,14 +106,13 @@ stream = ExtResource( 2 )
 autoplay = true
 
 [node name="GameOverScreen" type="MarginContainer" parent="."]
-visible = false
 margin_left = -375.0
 margin_top = -684.0
 margin_right = 723.0
 margin_bottom = -65.0
 
 [node name="ColorOverlay" type="ColorRect" parent="GameOverScreen"]
-modulate = Color( 0, 0, 0, 0.529412 )
+modulate = Color( 0.294118, 0.203922, 0.203922, 0.529412 )
 margin_right = 1098.0
 margin_bottom = 619.0
 
@@ -119,11 +127,31 @@ margin_bottom = 174.0
 texture = ExtResource( 7 )
 stretch_mode = 4
 
-[node name="GameOverText" type="TextureRect" parent="GameOverScreen/VBoxContainer"]
-modulate = Color( 0, 0, 0, 1 )
+[node name="FinalScoreTitle" type="RichTextLabel" parent="GameOverScreen/VBoxContainer"]
 margin_top = 178.0
 margin_right = 1098.0
-margin_bottom = 337.0
+margin_bottom = 215.0
+custom_colors/default_color = Color( 1, 0.392157, 0.392157, 1 )
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[center] Final Score [/center]"
+text = " Final Score "
+fit_content_height = true
+
+[node name="FinalScore" type="RichTextLabel" parent="GameOverScreen/VBoxContainer"]
+margin_top = 219.0
+margin_right = 1098.0
+margin_bottom = 250.0
+custom_colors/default_color = Color( 1, 0.392157, 0.392157, 1 )
+custom_fonts/normal_font = SubResource( 4 )
+bbcode_enabled = true
+fit_content_height = true
+
+[node name="GameOverText" type="TextureRect" parent="GameOverScreen/VBoxContainer"]
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 254.0
+margin_right = 1098.0
+margin_bottom = 413.0
 texture = ExtResource( 8 )
 stretch_mode = 4
 

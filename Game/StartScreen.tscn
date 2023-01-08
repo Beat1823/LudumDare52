@@ -4,7 +4,7 @@
 [ext_resource path="res://Game/UI/Start button.png" type="Texture" id=2]
 [ext_resource path="res://Game/UI/Harvest moon.png" type="Texture" id=3]
 [ext_resource path="res://Game/StartScreen.gd" type="Script" id=4]
-[ext_resource path="res://Game/UI/GameFontCramps.tres" type="DynamicFontData" id=5]
+[ext_resource path="res://Game/UI/Mokoto Glitch Mark.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Game/Audio/Music.wav" type="AudioStream" id=6]
 [ext_resource path="res://Game/UI/Buttons.png" type="Texture" id=7]
 

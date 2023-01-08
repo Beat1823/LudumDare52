@@ -13,6 +13,7 @@ func gameover():
 	$ScoreTimer.stop()
 	$SpawnTimer.stop()
 	$GameOverScreen.show()
+	$GameOverScreen/VBoxContainer/FinalScore.bbcode_text = "[center]" + String (score) + "[/center]"
 
 func newgame():
 	score = 0
@@ -53,3 +54,4 @@ func _on_PlayerUFO_PlayerDestroyed():
 
 func _on_Restart_pressed():
 	$GameOverScreen.hide()
+	get_tree().change_scene("res://Game/MainScene.tscn")
