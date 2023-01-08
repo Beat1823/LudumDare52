@@ -61,7 +61,7 @@ func SetTractorBeam (IsON):
 	$TracktorBeamArea/AnimatedSprite.visible = IsON
 	if IsON and not $SoundBeam.playing:
 		$SoundBeam.play()
-	elif IsON:
+	elif !IsON:
 		$SoundBeam.stop()
 
 

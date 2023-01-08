@@ -57,6 +57,7 @@ StabilizeDelaySeconds = 0.3
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "Hover"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -103,7 +104,6 @@ polygon = PoolVector2Array( 0, 0, 10.367, 10.0394, -10.367, 10.0958 )
 position = Vector2( 1, 80 )
 scale = Vector2( 1.2, 1.2 )
 frames = SubResource( 4 )
-frame = 1
 playing = true
 
 [node name="HarvestArea" type="Area2D" parent="."]
@@ -137,7 +137,7 @@ volume_db = -16.423
 
 [node name="SoundBeam" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 10 )
-volume_db = -6.001
+volume_db = -11.174
 
 [connection signal="body_entered" from="TracktorBeamArea" to="." method="_on_TracktorBeamArea_body_entered"]
 [connection signal="body_entered" from="HarvestArea" to="." method="_on_HarvestArea_body_entered"]
