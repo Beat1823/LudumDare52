@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/UFO/PlayerUFO.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Audio/Music.wav" type="AudioStream" id=2]
 [ext_resource path="res://Game/MainScene.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -56,6 +57,10 @@ margin_top = -651.0
 margin_right = -308.0
 margin_bottom = -611.0
 text = "Score:0"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
 
 [connection signal="NpcAbsorbed" from="PlayerUFO" to="." method="_on_PlayerUFO_NpcAbsorbed"]
 [connection signal="PlayerDestroyed" from="PlayerUFO" to="." method="_on_PlayerUFO_PlayerDestroyed"]

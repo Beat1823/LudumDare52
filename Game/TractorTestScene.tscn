@@ -48,7 +48,6 @@ color = Color( 0.0470588, 0.890196, 0.396078, 1 )
 
 [node name="PlayerUFO" parent="." instance=ExtResource( 1 )]
 MaxEnergy = 100000.0
-reverse_input_rate_up = 0.5
 
 [node name="RigidBody2D2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 194, 616 )
