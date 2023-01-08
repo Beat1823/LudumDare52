@@ -18,7 +18,7 @@ func newgame():
 	$StartWaitTimer.start()
 
 func _process(delta):
-	$ScoreLabel.text = String(score)
+	$ScoreText/ScoreLabel.text = String(score)
 
 func addscore(points):
 	score += points

@@ -14,13 +14,19 @@ config/name="LudumDare52"
 run/main_scene="res://Game/StartScreen.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/resizable=false
+
 [global]
 
 gravity=false
+font=false
 
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+theme/custom_font="res://Game/UI/GameFontCramps.tres"
 
 [input]
 

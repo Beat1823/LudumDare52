@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game/UFO/PlayerUFO.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Audio/Music.wav" type="AudioStream" id=2]
 [ext_resource path="res://Game/MainScene.gd" type="Script" id=3]
+[ext_resource path="res://Game/UI/GameFontCramps.tres" type="DynamicFontData" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 512, 50 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 4 )
 
 [node name="MainScene" type="Node2D"]
 position = Vector2( 356, 675 )
@@ -51,12 +55,20 @@ one_shot = true
 [node name="StartPos" type="Position2D" parent="."]
 position = Vector2( 180, -580 )
 
-[node name="ScoreLabel" type="RichTextLabel" parent="."]
-margin_left = -348.0
-margin_top = -651.0
-margin_right = -308.0
-margin_bottom = -611.0
-text = "Score:0"
+[node name="ScoreText" type="RichTextLabel" parent="."]
+margin_left = -351.0
+margin_top = -653.0
+margin_right = -270.0
+margin_bottom = -613.0
+custom_fonts/normal_font = SubResource( 2 )
+text = "Score"
+
+[node name="ScoreLabel" type="RichTextLabel" parent="ScoreText"]
+margin_left = 62.0
+margin_top = 3.0
+margin_right = 102.0
+margin_bottom = 43.0
+text = "1"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
