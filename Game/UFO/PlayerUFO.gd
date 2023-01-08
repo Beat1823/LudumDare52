@@ -13,7 +13,7 @@ var collision_bounce = 0.2
 
 
 var previous_linear_velocity : Vector2 = Vector2.ZERO
-
+var should_teleport = false
 # Movement params
 export var thrustForwardForce= 500.0
 export var thrustReverseForce = 250
@@ -86,10 +86,27 @@ func _integrate_forces(state):
 	var input_force = ProcessInputForce(state.step)
 	var input_torque= ProcessInputRotation(state)
 	
+	
+	if (should_teleport):
+		should_teleport = false
+		var bodyPos = state.transform.origin
+		var screenCenter =get_viewport_center()
+		var margin = 10
+		print(bodyPos.y-screenCenter.y)
+		if (abs(bodyPos.y-screenCenter.y) > (get_viewport_rect().size.y/2 + margin)):
+			TeleportCenterNotify()
+			state.transform.origin = screenCenter
+		else:
+			state.transform.origin = Vector2(screenCenter.x + (screenCenter.x - bodyPos.x)*0.9, bodyPos.y)
+		
+	
 	set_applied_force(collision_force+input_force)
 	set_applied_torque(input_torque)
 	
 	
+func TeleportCenterNotify():
+	tryEmitColisionParticles(Vector2(0 , 0))
+	ReduceEnergy(20)
 
 func StabilizeUFO(isStab):
 	if (!isStab):
@@ -143,8 +160,6 @@ func ProcessInputRotation (state):
 	
 
 
-
-
 func _process(delta):
 	if Input.is_action_pressed("TractorBeam"):
 		SetTractorBeam (true)
@@ -193,3 +208,13 @@ func _on_TracktorBeamArea_body_entered(body):
 	if (body.is_in_group("enemies")):
 		body.mode = RigidBody2D.MODE_RIGID
 		body.is_moving = false
+		body.linear_damp = -1
+
+
+func _on_VisibilityNotifier2D_viewport_exited(viewport):
+		should_teleport=true
+
+func get_viewport_center() -> Vector2:
+	var transform : Transform2D = get_viewport_transform()
+	var scale : Vector2 = transform.get_scale()
+	return -transform.origin / scale + get_viewport_rect().size / scale / 2

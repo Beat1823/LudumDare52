@@ -1,12 +1,13 @@
 extends RigidBody2D
 export var  is_moving = false
 var direction_moving = 1
-export var speedX = 10
+export var speedX = 100
 
 func _ready():
 	$AnimatedSprite.playing = true
 	add_to_group("enemies")
-	mode =RigidBody2D.MODE_RIGID
+	mode =RigidBody2D.MODE_CHARACTER
+	linear_damp =3
 	direction_moving = sign (rand_range(-1,1))
 func _integrate_forces(state):
 	if (is_moving):
