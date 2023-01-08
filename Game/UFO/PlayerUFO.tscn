@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Game/UFO/PlayerUFO.gd" type="Script" id=1]
 [ext_resource path="res://Game/UFO/Sprites/goodUFO1.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://InputReverseCurve.tres" type="Curve" id=6]
 [ext_resource path="res://InputForwardCurve.tres" type="Curve" id=7]
 [ext_resource path="res://Game/UFO/Sprites/goodUFO3.png" type="Texture" id=8]
+[ext_resource path="res://Game/Audio/Pickup.wav" type="AudioStream" id=9]
+[ext_resource path="res://Game/Audio/Beam.wav" type="AudioStream" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -53,6 +55,7 @@ StabilizeDelaySeconds = 0.3
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "Hover"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -124,6 +127,14 @@ margin_top = -39.0
 margin_right = 25.0
 margin_bottom = 1.0
 text = "Test"
+
+[node name="SoundPickup" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = -16.423
+
+[node name="SoundBeam" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+volume_db = -6.001
 
 [connection signal="body_entered" from="HarvestArea" to="." method="_on_HarvestArea_body_entered"]
 [connection signal="timeout" from="StabilizationTimer" to="." method="_on_StabilizationTimer_timeout"]

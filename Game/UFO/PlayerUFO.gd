@@ -59,6 +59,12 @@ func SetTractorBeam (IsON):
 	$TracktorBeamArea/TrackBeamCollision.disabled = !IsON
 	$HarvestArea/CollisionShape2D.disabled = !IsON
 	$TracktorBeamArea/AnimatedSprite.visible = IsON
+	if IsON and not $SoundBeam.playing:
+		$SoundBeam.play()
+		print("LOL1")
+	elif not IsON:
+		print("LOL")
+		$SoundBeam.stop()
 
 
 func _integrate_forces(state):
@@ -143,6 +149,7 @@ func _process(delta):
 	if Input.is_action_pressed("TractorBeam"):
 		SetTractorBeam (true)
 	else:
+		print("NOT PRESSED")
 		SetTractorBeam (false)
 	ReduceEnergy (delta*EnergyConsuptimtionPerSec)
 
@@ -171,3 +178,7 @@ func UpdateEnergyBar():
 
 func _on_EnergyUpdateTimer_timeout():
 	UpdateEnergyBar()
+
+func _on_PlayerUFO_NpcAbsorbed():
+	$SoundPickup.play()
+	pass # Replace with function body.
