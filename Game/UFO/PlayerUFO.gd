@@ -6,6 +6,7 @@ var energy:float
 export var ImpactEnergyModifier = 0.004
 export var EnergyConsuptimtionPerSec =1
 export var EnergyGain = 15
+export var EnergyLoseTeleportCenter = 20
 
 # Impact vars
 var collision_force : Vector2 = Vector2.ZERO
@@ -89,13 +90,14 @@ func _integrate_forces(state):
 		should_teleport = false
 		var bodyPos = state.transform.origin
 		var screenCenter =get_viewport_center()
+		var vieportScale = get_viewport_transform().get_scale()
 		var margin = 10
 		print(bodyPos.y-screenCenter.y)
 		if (abs(bodyPos.y-screenCenter.y) > (get_viewport_rect().size.y/2 + margin)):
 			TeleportCenterNotify()
 			state.transform.origin = screenCenter
 		else:
-			state.transform.origin = Vector2(screenCenter.x + (screenCenter.x - bodyPos.x)*0.9, bodyPos.y)
+			state.transform.origin = Vector2(screenCenter.x + (screenCenter.x - bodyPos.x)*vieportScale.x*0.9, bodyPos.y)
 		
 	
 	set_applied_force(collision_force+input_force)
@@ -104,7 +106,7 @@ func _integrate_forces(state):
 	
 func TeleportCenterNotify():
 	tryEmitColisionParticles(Vector2(0 , 0))
-	ReduceEnergy(20)
+	ReduceEnergy(EnergyLoseTeleportCenter)
 
 func StabilizeUFO(isStab):
 	if (!isStab):

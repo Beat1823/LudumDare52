@@ -38,6 +38,7 @@ position = Vector2( 10, -4 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "Cow"
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
