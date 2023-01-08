@@ -187,3 +187,9 @@ func _on_PlayerUFO_NpcAbsorbed():
 func tryEmitColisionParticles (impactPoin):
 	if (!$CollisionShape2D/HitParticles.emitting):
 		$CollisionShape2D/HitParticles.restart()
+
+
+func _on_TracktorBeamArea_body_entered(body):
+	if (body.is_in_group("enemies")):
+		body.mode = RigidBody2D.MODE_RIGID
+		body.is_moving = false
