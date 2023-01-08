@@ -4,6 +4,7 @@ extends RigidBody2D
 export(float) var MaxEnergy = 100
 var energy:float
 export var ImpactEnergyModifier = 0.004
+export var EnergyPerEnemy = 20
 export var EnergyConsuptimtionPerSec =1
 
 # Impact vars
@@ -163,6 +164,8 @@ func ReduceEnergy(amount):
 func _on_HarvestArea_body_entered(body): 
 	if body.is_in_group("enemies"):
 		body.queue_free()
+		energy += EnergyPerEnemy
+		energy = min(energy, MaxEnergy)
 		emit_signal("NpcAbsorbed")
 	
 

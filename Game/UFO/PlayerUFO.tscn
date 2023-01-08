@@ -48,7 +48,7 @@ __meta__ = {
 }
 ForwardInputCurve = ExtResource( 7 )
 ReverseInputCurve = ExtResource( 6 )
-StabilizeDownAngleThershold = 120.0
+StabilizeDownAngleThershold = 190.0
 stabilize_curve = ExtResource( 5 )
 StabilizeDelaySeconds = 0.3
 
