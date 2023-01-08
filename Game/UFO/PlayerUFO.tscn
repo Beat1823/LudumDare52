@@ -103,7 +103,7 @@ polygon = PoolVector2Array( 0, 0, 10.367, 10.0394, -10.367, 10.0958 )
 position = Vector2( 1, 80 )
 scale = Vector2( 1.2, 1.2 )
 frames = SubResource( 4 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="HarvestArea" type="Area2D" parent="."]

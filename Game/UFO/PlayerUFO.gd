@@ -5,6 +5,7 @@ export(float) var MaxEnergy = 100
 var energy:float
 export var ImpactEnergyModifier = 0.004
 export var EnergyConsuptimtionPerSec =1
+export var EnergyGain = 15
 
 # Impact vars
 var collision_force : Vector2 = Vector2.ZERO
@@ -192,7 +193,9 @@ func _on_EnergyUpdateTimer_timeout():
 
 func _on_PlayerUFO_NpcAbsorbed():
 	$SoundPickup.play()
-	pass # Replace with function body.
+	energy +=EnergyGain
+	energy = min(MaxEnergy,energy)
+	
 func tryEmitColisionParticles (impactPoin):
 	if (!$CollisionShape2D/HitParticles.emitting):
 		$CollisionShape2D/HitParticles.restart()
