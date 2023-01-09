@@ -106,6 +106,7 @@ stream = ExtResource( 2 )
 autoplay = true
 
 [node name="GameOverScreen" type="MarginContainer" parent="."]
+visible = false
 margin_left = -375.0
 margin_top = -684.0
 margin_right = 723.0
