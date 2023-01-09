@@ -43,21 +43,24 @@ position = Vector2( 317, 98 )
 gravity_scale = 0.5
 contacts_reported = 10
 contact_monitor = true
+linear_damp = 1.0
 angular_damp = 2.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+SideThrustForce = 200
 ForwardInputCurve = ExtResource( 7 )
 ReverseInputCurve = ExtResource( 6 )
 stabilize_torqueForce = 8000.0
 StabilizeDownAngleThershold = 190.0
 stabilize_curve = ExtResource( 5 )
-StabilizeDelaySeconds = 0.3
+StabilizeDelaySeconds = 0.1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "Hover"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -104,6 +107,7 @@ polygon = PoolVector2Array( 0, 0, 10.367, 10.0394, -10.367, 10.0958 )
 position = Vector2( 1, 80 )
 scale = Vector2( 1.2, 1.2 )
 frames = SubResource( 4 )
+frame = 1
 playing = true
 
 [node name="HarvestArea" type="Area2D" parent="."]

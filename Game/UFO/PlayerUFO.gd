@@ -18,6 +18,7 @@ var should_teleport = false
 # Movement params
 export var thrustForwardForce= 500.0
 export var thrustReverseForce = 250
+export var SideThrustForce  = 500
 var thrust = Vector2(0, -1*thrustForwardForce)
 var reverse_thrust = Vector2(0,thrustReverseForce)
 
@@ -136,7 +137,10 @@ func ProcessInputForce (delta):
 		forward_input_level = max (forward_input_level,0)
 		reverse_input_level -= reverse_input_rate_down*delta
 		reverse_input_level = max (reverse_input_level,0)
-	
+	if Input.is_action_pressed("Left"):
+		thrustforce += Vector2(-1*SideThrustForce,0)
+	if Input.is_action_pressed("Right"):
+		thrustforce += Vector2(SideThrustForce,0)
 	return thrustforce
 	
 	
